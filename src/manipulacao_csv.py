@@ -23,3 +23,25 @@ def ler_csv(caminho: str):
     # Cria um dataframe chamado dados e o retorna
     dados = pd.read_csv(caminho)
     return dados
+
+def filtar_colunas(dataframe, lista_colunas: list):
+    """
+    Função que recebe um dataframe e uma lista de colunas e retorna um novo dataframe somente com as colunas da lista.
+
+    Parameters
+    ----------
+    dataframe : pandas.core.frame.DataFrame
+        Dataframe que precisa ser filtrado.
+    lista_colunas : list
+        Lista de colunas que deseja no novo dataframe.
+
+    Returns
+    -------
+    novo_dataframe : pandas.core.frame.DataFrame
+        Dataframe filtrado, que somente possui as colunas escolhidas.
+
+    """
+    
+    # Cria um novo dataframe apenas com as colunas da lista e o retorna
+    novo_dataframe = dataframe[lista_colunas]
+    return novo_dataframe
