@@ -26,7 +26,7 @@ def funcao_split(objeto: str, separador: str) -> list[str]:
     except AttributeError:
         return objeto
 
-def tratar_coluna(dataframe: pd.core.frame.DataFrame, coluna: str, drop_faltantes: bool=False, fill_faltantes: bool=False, valor_fill=0, split_por_ponto_e_virgula: bool=False) -> pd.core.frame.DataFrame:
+def tratamento_valores_faltantes(dataframe: pd.core.frame.DataFrame, coluna: str, drop_faltantes: bool=False, fill_faltantes: bool=False, valor_fill=0) -> pd.core.frame.DataFrame:
     """
     Funcao que recebe um dataframe, uma coluna especifica, e alguns parametros, e retorna um dataframe com os dados tratados na coluna escolhida, a partir dos parametros passados.
 
@@ -42,8 +42,6 @@ def tratar_coluna(dataframe: pd.core.frame.DataFrame, coluna: str, drop_faltante
         Boleano que determina se os valores faltantes vao ou nao ser preenchidos. O padrao e False (Falso).
     valor_fill : TYPE, optional
         Valor para preenchimento dos valores faltantes. O padrao e 0.
-    split_por_ponto_e_virgula : bool, optional
-        Boleano que determina se os dados vao ou nao ser separados por ponto e virgula em uma lista. O padrao e False (Falso).
 
     Returns
     -------
@@ -61,9 +59,66 @@ def tratar_coluna(dataframe: pd.core.frame.DataFrame, coluna: str, drop_faltante
     elif fill_faltantes:
         dataframe_tratado = dataframe_tratado.fillna(subset=[coluna], value=valor_fill)
     
-    # Caso os dados preisem ser separados por ponto e vírgula em uma lista, então os dados vão ser separados usando a funcao_split e substituidos no novo dataframe
-    if split_por_ponto_e_virgula:
-        dataframe_tratado[coluna] = dataframe_tratado[coluna].apply(funcao_split, args=";")
+    # Retorna o dataframe tratado
+    return dataframe_tratado
+
+def tratamento_valores_atipicos(dataframe: pd.core.frame.DataFrame, coluna: str, limite_inferior_valores: int|float=(-1)*np.inf, remover_zero: bool=False, limite_superior_valores: int|float=np.inf) -> pd.core.frame.DataFrame:
+    """
+    Funcao que recebe um dataframe e uma coluna especifica e retorna um novo dataframe que possui apenas as linhas que respeitam os limites e condicoes passadas na coluna escolhida.
+
+    Parameters
+    ----------
+    dataframe : pd.core.frame.DataFrame
+        Dataframe a ser tratado.
+    coluna : str
+        Coluna escolhida para o tratamento.
+    limite_inferior_valores : int|float, optional
+        Limite inferior, todos os dados retornados serao maiores ou iguais a ele. O padrao e (-1)*np.inf (infinito negativo).
+    remover_zero : bool, optional
+        Boleano que determina se os valores iguais a 0 serao ou nao removidos. O padrao e False (Falso).
+    limite_superior_valores : int|float, optional
+        Limite superior, todos os dados retornados serao menores ou iguais a ele. O padrao e np.inf (infinito positivo).
+
+    Returns
+    -------
+    dataframe_tratado : TYPE
+        Dataframe tratado, onde em cada linha, os valores na coluna espicifica respeitam as condicoes e limites passados.
+
+    """
+    # Define o novo dataframe como uma cópia do original
+    dataframe_tratado = dataframe.copy()
+    
+    # Se for necessário remover os valores zerados, filtra apenas os valores não nulos.
+    if remover_zero:
+        dataframe_tratado = dataframe_tratado[dataframe_tratado[coluna] != 0]
+    
+    # Independente da remoção ou não dos valores nulos, filtra apenas os valores que são maiores ou iguais ao limite inferior e menores ou iguais as limite superior.
+    dataframe_tratado = dataframe_tratado[(dataframe_tratado[coluna] >= limite_inferior_valores) & (dataframe_tratado[coluna] <= limite_superior_valores)]
+    # Retorna o dataframe tratado
+    return dataframe_tratado
+
+def tratamento_lista_de_valores(dataframe: pd.core.frame.DataFrame, coluna: str) -> pd.core.frame.DataFrame:
+    """
+    Funcao que recebe um dataframe e coluna, e separa os elementos de cada linha dessa coluna em uma lista, onde o separador e ponto e virgula.
+
+    Parameters
+    ----------
+    dataframe : pd.core.frame.DataFrame
+        Dataframe a ser tratado.
+    coluna : str
+        Coluna na qual estao os dados a serem tratados.
+
+    Returns
+    -------
+    dataframe_tratado : pd.core.frame.DataFrame
+        Dataframe modificado apos a separacao em lista de cada elemento da coluna escolhida.
+
+    """
+    # Define o novo dataframe como uma cópia do original
+    dataframe_tratado = dataframe.copy()
+    
+    # Caso os dados precisem ser separados por ponto e vírgula em uma lista, então os dados vão ser separados usando a funcao_split e substituidos no novo dataframe
+    dataframe_tratado[coluna] = dataframe_tratado[coluna].apply(funcao_split, args=";")
     
     # Retorna o dataframe tratado
     return dataframe_tratado

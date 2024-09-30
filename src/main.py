@@ -37,7 +37,13 @@ dados_filtrados: pd.core.frame.DataFrame = mc.filtar_colunas(dados, lista_coluna
 # EXEMPLOS DAS NOVAS FUNÇÕES
 print(dados_filtrados)
 
-dados_tratados: pd.core.frame.DataFrame = td.tratar_coluna(dados_filtrados, "LanguageWorkedWith", drop_faltantes=True, split_por_ponto_e_virgula=True)
+dados_tratados: pd.core.frame.DataFrame = td.tratamento_valores_faltantes(dados_filtrados, "YearsCoding", drop_faltantes=True)
+dados_tratados: pd.core.frame.DataFrame = td.tratamento_valores_faltantes(dados_tratados, "LanguageWorkedWith", drop_faltantes=True)
+dados_tratados: pd.core.frame.DataFrame = td.tratamento_lista_de_valores(dados_tratados, "LanguageWorkedWith")
+dados_tratados: pd.core.frame.DataFrame = td.tratamento_valores_faltantes(dados_tratados, "ConvertedSalary", drop_faltantes=True)
+dados_tratados: pd.core.frame.DataFrame = td.tratamento_valores_atipicos(dados_tratados, "ConvertedSalary", remover_zero=True, limite_superior_valores=2400000)
 
+print(dados_tratados["YearsCoding"])
 print(dados_tratados["LanguageWorkedWith"])
+print(dados_tratados["ConvertedSalary"])
 
