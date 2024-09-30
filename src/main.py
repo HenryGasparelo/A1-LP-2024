@@ -1,5 +1,7 @@
 import manipulacao_csv as mc
 import tratamento_dados as td
+import preparacao_visualizacao as pv
+import armazenamento_dicionarios as ad
 import pandas as pd
 
 # Caminho para o arquivo csv com os dados do stack overflow
@@ -47,3 +49,7 @@ print(dados_tratados["YearsCoding"])
 print(dados_tratados["LanguageWorkedWith"])
 print(dados_tratados["ConvertedSalary"])
 
+dados_tratados: pd.core.frame.DataFrame = td.tratamento_valores_faltantes(dados_tratados, "CareerSatisfaction", drop_faltantes=True)
+dados_modificados: pd.core.frame.DataFrame = pv.modificar_dados_usando_dicionario(dados_tratados, "CareerSatisfaction", ad.dicionario_CareerSatisfaction)
+
+print(dados_modificados["CareerSatisfaction"])

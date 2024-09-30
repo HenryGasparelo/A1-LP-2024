@@ -86,7 +86,7 @@ def tratamento_valores_atipicos(dataframe: pd.core.frame.DataFrame, coluna: str,
 
     """
     # Define o novo dataframe como uma cópia do original
-    dataframe_tratado = dataframe.copy()
+    dataframe_tratado: pd.core.frame.DataFrame = dataframe.copy()
     
     # Se for necessário remover os valores zerados, filtra apenas os valores não nulos.
     if remover_zero:
@@ -115,7 +115,7 @@ def tratamento_lista_de_valores(dataframe: pd.core.frame.DataFrame, coluna: str)
 
     """
     # Define o novo dataframe como uma cópia do original
-    dataframe_tratado = dataframe.copy()
+    dataframe_tratado: pd.core.frame.DataFrame = dataframe.copy()
     
     # Caso os dados precisem ser separados por ponto e vírgula em uma lista, então os dados vão ser separados usando a funcao_split e substituidos no novo dataframe
     dataframe_tratado[coluna] = dataframe_tratado[coluna].apply(funcao_split, args=";")
