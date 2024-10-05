@@ -34,7 +34,7 @@ lista_colunas: list[str] = ["Student",
 # OBS: Salário dado anualmente
 
 # Dataframe apenas com as colunas selecionadas
-dados_filtrados: pd.core.frame.DataFrame = mc.filtar_colunas(dados, lista_colunas)
+dados_filtrados: pd.core.frame.DataFrame = mc.filtrar_colunas(dados, lista_colunas)
 
 # EXEMPLOS DAS NOVAS FUNÇÕES
 print(dados_filtrados)
@@ -53,3 +53,10 @@ dados_tratados: pd.core.frame.DataFrame = td.tratamento_valores_faltantes(dados_
 dados_modificados: pd.core.frame.DataFrame = pv.modificar_dados_usando_dicionario(dados_tratados, "CareerSatisfaction", ad.dicionario_CareerSatisfaction)
 
 print(dados_modificados["CareerSatisfaction"])
+
+dataframe_filtrado = mc.filtrar_linhas(dados, "Employment", 'Employed part-time', 'Employed full-time')
+print(dataframe_filtrado["Employment"]) 
+
+print(pv.analise_unidimensional(dados_tratados, "ConvertedSalary"))
+coeficiente_de_correlacao = pv.analise_bidimensional(dados_modificados, "ConvertedSalary", "CareerSatisfaction")
+print(coeficiente_de_correlacao)

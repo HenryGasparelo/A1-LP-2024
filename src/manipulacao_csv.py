@@ -24,7 +24,7 @@ def ler_csv(caminho: str) -> pd.core.frame.DataFrame:
     dados: pd.core.frame.DataFrame = pd.read_csv(caminho)
     return dados
 
-def filtar_colunas(dataframe: pd.core.frame.DataFrame, lista_colunas: list) -> pd.core.frame.DataFrame:
+def filtrar_colunas(dataframe: pd.core.frame.DataFrame, lista_colunas: list[str]) -> pd.core.frame.DataFrame:
     """
     Função que recebe um dataframe e uma lista de colunas e retorna um novo dataframe somente com as colunas da lista.
 
@@ -45,3 +45,13 @@ def filtar_colunas(dataframe: pd.core.frame.DataFrame, lista_colunas: list) -> p
     # Cria um novo dataframe apenas com as colunas da lista e o retorna
     novo_dataframe: pd.core.frame.DataFrame = dataframe[lista_colunas]
     return novo_dataframe
+
+def filtrar_linhas(dataframe, coluna_filtro, *args):
+    novo_dataframe = dataframe[dataframe[coluna_filtro] == args[0]]
+    if len(args) > 1:
+        for elemento_filtro in args[1:]:
+            dataframe_filtrado = dataframe[dataframe[coluna_filtro] == elemento_filtro]
+            novo_dataframe = pd.merge(novo_dataframe, dataframe_filtrado, how="outer")
+        
+    return novo_dataframe
+        
