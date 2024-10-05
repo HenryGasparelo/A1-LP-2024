@@ -2,6 +2,7 @@
 
 import pandas as pd
 import numpy as np
+import manipulacao_csv as mc
 
 def aplicar_dicionario(key: str, dicionario: dict):
     """
@@ -126,3 +127,55 @@ def analise_bidimensional(dataframe: pd.core.frame.DataFrame, coluna1: str, colu
     
     # Retorna o coeficiente de correlacao
     return correlacao
+
+def criar_coluna_habitos_saudaveis(dataframe: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
+    """
+    Funcao que recebe um dataframe e, a partir das colunas referentes aos habitos saudaveis, retorna um novo dataframe com uma coluna de habitos saudaveis com uma nota de 0 a 10 que representa os habitos saudaveis do programador.
+
+    Parameters
+    ----------
+    dataframe : pd.core.frame.DataFrame
+        Dataframe com os dados.
+
+    Returns
+    -------
+    dataframe : TYPE
+        Dataframe com a coluna de habitos saudaveis e os dados.
+
+    """
+    # Dicionario com os pesos de cada coluna
+    coeficientes: dict = {"HoursComputer":0.25,
+                    "HoursOutside":0.25,
+                    "SkipMeals":0.25,
+                    "Exercise":0.25}
+    
+    # Define a coluna de habitos saudaveis com a soma de cada coluna multiplicada pelo seu respectivo coeficiente
+    dataframe["HabitosSaudaveis"] = dataframe["HoursComputer"] * coeficientes["HoursComputer"] + dataframe["HoursOutside"] * coeficientes["HoursOutside"] + dataframe["SkipMeals"] * coeficientes["SkipMeals"] + dataframe["Exercise"] * coeficientes["Exercise"]
+    # Retorna o dataframe
+    return dataframe
+
+def calcular_empregabilidade(dataframe: pd.core.frame.DataFrame) -> float:
+    """
+    Funcao que recebe um dataframe e retorna um numero de 0 a 1 que representa a empregabilidade de todos os programadores do dataframe.
+
+    Parameters
+    ----------
+    dataframe : pd.core.frame.DataFrame
+        Dataframe com os dados.
+
+    Returns
+    -------
+    float
+        Empregabilidade calculada como a razao entre o numero de programadores empregados e o numero total de programadores.
+
+    """
+    # Define um novo dataframe apenas com as linhas de programadores empregados
+    dataframe_empregados = mc.filtrar_linhas(dataframe, "Employment", 'Employed part-time', 'Employed full-time', "Independent contractor, freelancer, or self-employed")
+    # Conta quantos programadores empregados existem no dataframe
+    quantidade_empregados = len(dataframe_empregados["Employment"])
+    # Conta o numero total de programadores no dataframe
+    quantidade_programadores = len(dataframe["Employment"])
+    # Calcula a empregabilidade como a razao entre essas quantidades
+    empregabilidade = quantidade_empregados / quantidade_programadores
+    # Retorna a empregabilidade
+    return empregabilidade
