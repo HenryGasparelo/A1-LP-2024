@@ -10,7 +10,7 @@ caminho_arquivo: str = "../data/survey_results_public.csv"
 # Dataframe gerado usando o csv com os dados do stack overflow
 dados: pd.core.frame.DataFrame = mc.ler_csv(caminho_arquivo)
 
-# Lista de colunas que irão ser utilizadas
+# Lista de colunas que irao ser utilizadas
 lista_colunas: list[str] = ["Student", 
                  "Employment", 
                  "FormalEducation", 
@@ -31,12 +31,12 @@ lista_colunas: list[str] = ["Student",
                  "SkipMeals",
                  "Exercise",
                  "Age"]
-# OBS: Salário dado anualmente
+# OBS: Salario dado anualmente
 
 # Dataframe apenas com as colunas selecionadas
 dados_filtrados: pd.core.frame.DataFrame = mc.filtrar_colunas(dados, lista_colunas)
 
-# EXEMPLOS DAS NOVAS FUNÇÕES
+# EXEMPLOS DAS NOVAS FUNCOES
 print(dados_filtrados)
 
 dados_tratados: pd.core.frame.DataFrame = td.tratamento_valores_faltantes(dados_filtrados, "YearsCoding", drop_faltantes=True)
