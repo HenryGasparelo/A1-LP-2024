@@ -20,7 +20,7 @@ def funcao_split(objeto: str, separador: str) -> list[str]:
         Lista onde os elementos sao as parcelas do objeto separadas pelo separador.
 
     """
-    # Tenta aplicar o método split no objeto e retorná-lo, caso o objeto não possua o método split, retorna apenas o objeto.
+    # Tenta aplicar o metodo split no objeto e retorna-lo, caso o objeto nÃ£o possua o metodo split, retorna apenas o objeto.
     try:
         return objeto.split(separador)
     except AttributeError:
@@ -49,13 +49,13 @@ def tratamento_valores_faltantes(dataframe: pd.core.frame.DataFrame, coluna: str
         Dataframe modificado apos cada tratamento.
 
     """
-    # Define o novo dataframe como uma cópia do original
+    # Define o novo dataframe como uma copia do original
     dataframe_tratado: pd.core.frame.DataFrame = dataframe.copy()
     
-    # Caso seja necessário remover os dados faltantes da coluna escolhida (drop_faltantes=True), então as linhas que não possuem esses dados serão removidas
+    # Caso seja necessario remover os dados faltantes da coluna escolhida (drop_faltantes=True), entao as linhas que nao possuem esses dados serao removidas
     if drop_faltantes:
         dataframe_tratado = dataframe_tratado.dropna(subset=[coluna])
-    # Caso seja necessário preencher os dados faltantes da coluna escolhida (fill_faltantes=True), então as cada valor faltante na coluna escolhida vai ser preenchido pelo valor passado para preenchimento
+    # Caso seja necessario preencher os dados faltantes da coluna escolhida (fill_faltantes=True), entao cada valor faltante na coluna escolhida vai ser preenchido pelo valor passado para preenchimento
     elif fill_faltantes:
         dataframe_tratado = dataframe_tratado.fillna(subset=[coluna], value=valor_fill)
     
@@ -85,14 +85,14 @@ def tratamento_valores_atipicos(dataframe: pd.core.frame.DataFrame, coluna: str,
         Dataframe tratado, onde em cada linha, os valores na coluna espicifica respeitam as condicoes e limites passados.
 
     """
-    # Define o novo dataframe como uma cópia do original
+    # Define o novo dataframe como uma copia do original
     dataframe_tratado: pd.core.frame.DataFrame = dataframe.copy()
     
-    # Se for necessário remover os valores zerados, filtra apenas os valores não nulos.
+    # Se for necessario remover os valores zerados, filtra apenas os valores nao nulos.
     if remover_zero:
         dataframe_tratado = dataframe_tratado[dataframe_tratado[coluna] != 0]
     
-    # Independente da remoção ou não dos valores nulos, filtra apenas os valores que são maiores ou iguais ao limite inferior e menores ou iguais as limite superior.
+    # Independente da remocao ou nao dos valores nulos, filtra apenas os valores que sao maiores ou iguais ao limite inferior e menores ou iguais as limite superior.
     dataframe_tratado = dataframe_tratado[(dataframe_tratado[coluna] >= limite_inferior_valores) & (dataframe_tratado[coluna] <= limite_superior_valores)]
     # Retorna o dataframe tratado
     return dataframe_tratado
@@ -114,10 +114,10 @@ def tratamento_lista_de_valores(dataframe: pd.core.frame.DataFrame, coluna: str)
         Dataframe modificado apos a separacao em lista de cada elemento da coluna escolhida.
 
     """
-    # Define o novo dataframe como uma cópia do original
+    # Define o novo dataframe como uma copia do original
     dataframe_tratado: pd.core.frame.DataFrame = dataframe.copy()
     
-    # Caso os dados precisem ser separados por ponto e vírgula em uma lista, então os dados vão ser separados usando a funcao_split e substituidos no novo dataframe
+    # Caso os dados precisem ser separados por ponto e virgula em uma lista, entao os dados vao ser separados usando a funcao_split e substituidos no novo dataframe
     dataframe_tratado[coluna] = dataframe_tratado[coluna].apply(funcao_split, args=";")
     
     # Retorna o dataframe tratado
