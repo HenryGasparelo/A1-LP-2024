@@ -21,7 +21,7 @@ def aplicar_dicionario(key: str, dicionario: dict):
         Valor atribuido a chave naquele dicionario.
 
     """
-    # Retorna o valor da chave no dicionário
+    # Retorna o valor da chave no dicionario
     return dicionario[key]
 
 def modificar_dados_usando_dicionario(dataframe: pd.core.frame.DataFrame, coluna: str, dicionario: dict) -> pd.core.frame.DataFrame:
