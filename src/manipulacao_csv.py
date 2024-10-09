@@ -1,12 +1,12 @@
-"""MODULO DE ORGANIZAÇÃO DO CSV"""
+"""MODULO DE ORGANIZACAO DO CSV"""
 
-# Importando os módulos necessários para as funções
+# Importando os modulos necessarios para as funcoes
 import pandas as pd
 import numpy as np
 
 def ler_csv(caminho: str) -> pd.core.frame.DataFrame: 
     """
-    Função que recebe um caminho relativo ao programa até um arquivo csv e retorna um dataframe gerado usando esse arquivo csv.
+    Funcao que recebe um caminho relativo ao programa ate um arquivo csv e retorna um dataframe gerado usando esse arquivo csv.
 
     Parameters
     ----------
@@ -26,7 +26,7 @@ def ler_csv(caminho: str) -> pd.core.frame.DataFrame:
 
 def filtrar_colunas(dataframe: pd.core.frame.DataFrame, lista_colunas: list[str]) -> pd.core.frame.DataFrame:
     """
-    Função que recebe um dataframe e uma lista de colunas e retorna um novo dataframe somente com as colunas da lista.
+    Funcao que recebe um dataframe e uma lista de colunas e retorna um novo dataframe somente com as colunas da lista.
 
     Parameters
     ----------
@@ -48,7 +48,7 @@ def filtrar_colunas(dataframe: pd.core.frame.DataFrame, lista_colunas: list[str]
 
 def filtrar_linhas(dataframe: pd.core.frame.DataFrame, coluna_filtro: str, *args) -> pd.core.frame.DataFrame:
     """
-    Funca que recebe um dataframe, uma coluna especifica e elementos, e retorna um novo dataframe apenas com as linhas que possuem os elementos na coluna especifica.
+    Funcao que recebe um dataframe, uma coluna especifica e elementos, e retorna um novo dataframe apenas com as linhas que possuem os elementos na coluna especifica.
 
     Parameters
     ----------
