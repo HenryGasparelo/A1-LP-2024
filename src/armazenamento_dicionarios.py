@@ -9,16 +9,22 @@ dicionario_Student = {
 dicionario_Employment = {
     'Employed part-time': 1,
     'Independent contractor, freelancer, or self-employed': 1,
-    'Employed full-time': 2
+    'Employed full-time': 2,
+    "Not employed, and not looking for work": 0,
+    "Not employed, but looking for work": 0,
+    "Retired": 0
 }
 
 dicionario_FormalEducation = {
-    'Some college/university study without earning a degree': 1,
-    'Associate degree': 2,
-    'Bachelor’s degree (BA, BS, B.Eng., etc.)': 3,
-    'Master’s degree (MA, MS, M.Eng., MBA, etc.)': 4,
-    'Professional degree (JD, MD, etc.)': 4,
-    'Other doctoral degree (Ph.D, Ed.D., etc.)': 5
+    'Some college/university study without earning a degree': 3,
+    'Associate degree': 4,
+    'Bachelor’s degree (BA, BS, B.Eng., etc.)': 7,
+    'Master’s degree (MA, MS, M.Eng., MBA, etc.)': 8,
+    'Professional degree (JD, MD, etc.)': 9,
+    'Other doctoral degree (Ph.D, Ed.D., etc.)': 10,
+    "I never completed any formal education": 0,
+    "Primary/elementary school": 1,
+    "Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)": 2
 }
 
 dicionario_YearsCoding = {
@@ -81,33 +87,33 @@ dicionario_UpdateCV = {
 }
 
 dicionario_HoursComputer = {
-    'Less than 1 hour': 1,
-    '1 - 4 hours': 2.5,
-    '5 - 8 hours': 6.5,
-    '9 - 12 hours': 10.5,
-    'Over 12 hours': 12
+    'Less than 1 hour': 10,
+    '1 - 4 hours': 10,
+    '5 - 8 hours': 8,
+    '9 - 12 hours': 6,
+    'Over 12 hours': 4
 }
 
 dicionario_HoursOutside = {
-    'Less than 30 minutes': 0.5,
-    '30 - 59 minutes': 0.75,
-    '1 - 2 hours': 1.5,
-    '3 - 4 hours': 3.5,
-    'Over 4 hours': 4
+    'Less than 30 minutes': 1,
+    '30 - 59 minutes': 3,
+    '1 - 2 hours': 6,
+    '3 - 4 hours': 8,
+    'Over 4 hours': 10
 }
 
 dicionario_SkipMeals = {
-    'Never': 0,
-    '1 - 2 times per week': 1.5,
-    '3 - 4 times per week': 3.5,
-    'Daily or almost every day': 6
+    'Never': 10,
+    '1 - 2 times per week': 6,
+    '3 - 4 times per week': 3,
+    'Daily or almost every day': 1
 }
 
 dicionario_Exercise = {
     "I don't typically exercise": 0,
-    '1 - 2 times per week': 1.5,
-    '3 - 4 times per week': 3.5,
-    'Daily or almost every day': 6
+    '1 - 2 times per week': 4,
+    '3 - 4 times per week': 8,
+    'Daily or almost every day': 10
 }
 
 dicionario_Age = {
