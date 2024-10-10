@@ -21,32 +21,38 @@ def gerar_dataframe_hipotese1(dataframe: pd.core.frame.DataFrame) -> pd.core.fra
 
     """
     # Cria um dataframe vazio apenas com os nomes das colunas que serao utilizadas na hipotese
-    dataframe_hipotese1: pd.core.frame.DataFrame = pd.DataFrame(columns=["YearsCoding", "HabitosSaudaveis", "LinguagemProgramacao"])
+    dataframe_hipotese1: pd.core.frame.DataFrame = pd.DataFrame(columns=["AnosCodando", "HabitosSaudaveis", "LinguagemProgramacao"])
     # Cria uma lista de todas as linguagens usadas na hipotese
     linguagens: list = ["Python", "JavaScript", "C", "Java"]
+    # Cria uma lista com todos os possiveis anos codando
+    lista_anos_codando: list = [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 30]
     # Para cada linguagem cria um novo dataframe, com as colunas base
     for linguagem in linguagens:
-        dataframe_temporario: pd.core.frame.DataFrame = mc.filtrar_colunas(dataframe, ["LanguageWorkedWith", "HoursComputer","HoursOutside","SkipMeals","Exercise", "YearsCoding"])
-        # Remove os valores faltantes
-        dataframe_temporario = dataframe_temporario.dropna()
-        # Transforma as listas de linguagens de programacao em listas de python
-        dataframe_temporario = td.tratamento_lista_de_valores(dataframe_temporario, "LanguageWorkedWith")
-        # Aplica os valores dos dicionario para cada coluna que precisa de tratamento
-        dataframe_temporario = pv.modificar_dados_usando_dicionario(dataframe_temporario, "HoursComputer", ad.dicionario_HoursComputer)
-        dataframe_temporario = pv.modificar_dados_usando_dicionario(dataframe_temporario, "HoursOutside", ad.dicionario_HoursOutside)
-        dataframe_temporario = pv.modificar_dados_usando_dicionario(dataframe_temporario, "SkipMeals", ad.dicionario_SkipMeals)
-        dataframe_temporario = pv.modificar_dados_usando_dicionario(dataframe_temporario, "Exercise", ad.dicionario_Exercise)
-        dataframe_temporario = pv.modificar_dados_usando_dicionario(dataframe_temporario, "YearsCoding", ad.dicionario_YearsCoding)
-        # Cria a coluna de Habitos Saudaveis
-        dataframe_temporario = pv.criar_coluna_habitos_saudaveis(dataframe_temporario)
-        # Filtra apenas as linhas que possuem a linguagem da iteracao
-        dataframe_temporario = mc.filtrar_linhas_por_um_elemento_em_lista(dataframe_temporario, "LanguageWorkedWith", linguagem)
-        # Define uma nova coluna com a linguagem
-        dataframe_temporario["LinguagemProgramacao"] = linguagem
-        # Filtra apenas as linhas que serao utilizadas na hipotese
-        dataframe_temporario = mc.filtrar_colunas(dataframe_temporario, ["YearsCoding", "HabitosSaudaveis", "LinguagemProgramacao"])
-        # Fundi o dataframe da linguagem com o principal
-        dataframe_hipotese1 = pd.merge(dataframe_hipotese1, dataframe_temporario, how="outer")
+            for ano_codando in lista_anos_codando:
+                dataframe_temporario: pd.core.frame.DataFrame = mc.filtrar_colunas(dataframe, ["LanguageWorkedWith", "HoursComputer","HoursOutside","SkipMeals","Exercise", "YearsCoding"])
+                # Remove os valores faltantes
+                dataframe_temporario = dataframe_temporario.dropna()
+                # Transforma as listas de linguagens de programacao em listas de python
+                dataframe_temporario = td.tratamento_lista_de_valores(dataframe_temporario, "LanguageWorkedWith")
+                # Aplica os valores dos dicionario para cada coluna que precisa de tratamento
+                dataframe_temporario = pv.modificar_dados_usando_dicionario(dataframe_temporario, "HoursComputer", ad.dicionario_HoursComputer)
+                dataframe_temporario = pv.modificar_dados_usando_dicionario(dataframe_temporario, "HoursOutside", ad.dicionario_HoursOutside)
+                dataframe_temporario = pv.modificar_dados_usando_dicionario(dataframe_temporario, "SkipMeals", ad.dicionario_SkipMeals)
+                dataframe_temporario = pv.modificar_dados_usando_dicionario(dataframe_temporario, "Exercise", ad.dicionario_Exercise)
+                dataframe_temporario = pv.modificar_dados_usando_dicionario(dataframe_temporario, "YearsCoding", ad.dicionario_YearsCoding)
+                # Cria a coluna de Habitos Saudaveis
+                dataframe_temporario = pv.criar_coluna_habitos_saudaveis(dataframe_temporario)
+                # Filtra apenas as linhas que possuem a linguagem da iteracao e o periodo codando
+                dataframe_temporario = mc.filtrar_linhas_por_um_elemento_em_lista(dataframe_temporario, "LanguageWorkedWith", linguagem)
+                dataframe_temporario = mc.filtrar_linhas(dataframe_temporario, "YearsCoding", ano_codando)
+                # Aplica a analise unidimensional para a coluna habitos saudaveis
+                analise = pv.analise_unidimensional(dataframe_temporario, "HabitosSaudaveis")
+                # Define habitos saudaveis como a media dos habitos saudaveis
+                habitos_saudaveis = analise["media"]
+                # Define uma nova linha com o periodo codando, os habitos saudaveis e a linguagem de programacao
+                nova_linha = {"AnosCodando": ano_codando, "HabitosSaudaveis": habitos_saudaveis, "LinguagemProgramacao": linguagem}
+                # Coloca essa linha no dataframe
+                dataframe_hipotese1.loc[len(dataframe_hipotese1)] = nova_linha
     # Retorna o dataframe da hipotese
     return dataframe_hipotese1
 
