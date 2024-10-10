@@ -193,3 +193,39 @@ def gerar_dataframe_hipotese4(dataframe: pd.core.frame.DataFrame) -> pd.core.fra
     # Retorna o dataframe da hipotese
     return dataframe_hipotese4
     
+def gerar_dataframe_hipotese1_original(dataframe):
+    # Cria um dataframe vazio apenas com as colunas que serao utilizadas
+    dataframe_hipotese1_original: pd.core.frame.DataFrame = pd.DataFrame(columns=["Satisfacao", "AnosCodando", "SalarioMedio"])
+    # Filtra o dataframe principal apenas com as colunas base
+    dataframe_filtrado: pd.core.frame.DataFrame = mc.filtrar_colunas(dataframe, ["YearsCoding", "CareerSatisfaction", "ConvertedSalary"])
+    # Remove os valores faltantes
+    dataframe_filtrado = dataframe_filtrado.dropna()
+    # Aplica os dicionarios as colunas que precisam deste tratamento
+    dataframe_filtrado = pv.modificar_dados_usando_dicionario(dataframe_filtrado, "CareerSatisfaction", ad.dicionario_CareerSatisfaction)
+    dataframe_filtrado = pv.modificar_dados_usando_dicionario(dataframe_filtrado, "YearsCoding", ad.dicionario_YearsCoding)
+    # Trata os valores atipicos de salario, removendo aqueles que sao nulos, inferiores a 2400 e superiores a 600000
+    dataframe_filtrado = td.tratamento_valores_atipicos(dataframe_filtrado, "ConvertedSalary", limite_inferior_valores=2400 ,remover_zero=True, limite_superior_valores=600000)
+    # Cria listas com os niveis de satisfacao
+    lista_niveis_satisfacao = ["Alto", "Medio", "Baixo"]
+    # Lista de possiveis anos codando
+    lista_anos_codando: list = [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 30]
+    # Para cada nivel de satisfacao e periodo codando cria uma copia do dataframe
+    for nivel_satisfacao in lista_niveis_satisfacao:
+        for periodo_codando in lista_anos_codando:
+            dataframe_copia: pd.core.frame.DataFrame = dataframe_filtrado.copy()
+            # Filtra apenas as linhas que possuem o nivel de satisfacao e o ano codando da iteracao
+            dataframe_copia = mc.filtrar_linhas(dataframe_copia, "CareerSatisfaction", nivel_satisfacao)
+            dataframe_copia = mc.filtrar_linhas(dataframe_copia, "YearsCoding", periodo_codando)
+            # Faz uma analise unidimensional da coluna salario convertido
+            analise_unidimensional: dict = pv.analise_unidimensional(dataframe_copia, "ConvertedSalary")
+            # Define o salario medio como a media
+            salario_medio: float = analise_unidimensional["media"]
+            # Cria uma nova linha com a satisfacao, anos codando e salario medio
+            nova_linha: dict = {"Satisfacao": nivel_satisfacao, "AnosCodando": periodo_codando, "SalarioMedio": salario_medio}
+            # Insere a linha no dataframe da hipotese
+            dataframe_hipotese1_original.loc[len(dataframe_hipotese1_original)] = nova_linha
+            
+    return dataframe_hipotese1_original
+            
+            
+    
