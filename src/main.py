@@ -49,3 +49,5 @@ print(dh.gerar_dataframe_hipotese4(dados))
 dados = td.tratamento_valores_faltantes(dados, "ConvertedSalary")
 dados = td.tratamento_valores_atipicos(dados, "ConvertedSalary", limite_inferior_valores=2400, remover_zero=True, limite_superior_valores=600000)
 print(pv.analise_unidimensional(dados, "ConvertedSalary"))
+
+print(dh.gerar_dataframe_hipotese1_original(dados))

@@ -64,13 +64,13 @@ dicionario_JobSatisfaction = {
 }
 
 dicionario_CareerSatisfaction = {
-    'Extremely dissatisfied': 0,
-    'Moderately dissatisfied': 1,
-    'Slightly dissatisfied': 2,
-    'Neither satisfied nor dissatisfied': 3,
-    'Slightly satisfied': 4,
-    'Moderately satisfied': 5,
-    'Extremely satisfied': 6
+    'Extremely dissatisfied': "Baixo",
+    'Moderately dissatisfied': "Baixo",
+    'Slightly dissatisfied': "Medio",
+    'Neither satisfied nor dissatisfied': "Medio",
+    'Slightly satisfied': "Medio",
+    'Moderately satisfied': "Alto",
+    'Extremely satisfied': "Alto"
 }
 
 dicionario_JobSearchStatus = {
