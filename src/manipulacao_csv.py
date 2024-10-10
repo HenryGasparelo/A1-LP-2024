@@ -77,3 +77,46 @@ def filtrar_linhas(dataframe: pd.core.frame.DataFrame, coluna_filtro: str, *args
         
     # Retorna o dataframe filtrado
     return novo_dataframe
+
+def filtrar_linhas_por_um_elemento_em_lista(dataframe:pd.core.frame.DataFrame, coluna: str, elemento_filtro: str) -> pd.core.frame.DataFrame:
+    """
+    Funcao que recebe um dataframe e uma coluna, onde cada elemento e uma lista, e retorna um novo dataframe apenas com as linhas que possuem o elemento do filtro.
+
+    Parameters
+    ----------
+    dataframe : pd.core.frame.DataFrame
+        Dataframe a ser filtrado.
+    coluna : str
+        Coluna escolhida.
+    elemento_filtro : str
+        Elemento escolhido para o filtro.
+
+    Returns
+    -------
+    pd.core.frame.DataFrame
+        Novo dataframe que possui somente as linhas que possuem o elemento escolhido para o filtro.
+
+    """
+    def verificar_pertencimento(lista:list) -> bool:
+        """
+        Verifica se uma lista possui um elemento.
+
+        Parameters
+        ----------
+        lista : list
+            Lista a ser verificada.
+
+        Returns
+        -------
+        bool
+            Retorna True se o elemento estiver na lista e False se nao estiver.
+
+        """
+        # Retorna True se o elemento estiver na lista e False se nao estiver
+        return elemento_filtro in lista
+    # Cria uma copia do dataframe original
+    novo_dataframe: pd.core.frame.DataFrame = dataframe.copy()
+    # Cria um novo dataframe apenas com as linhas que possuem o elemento do filtro, verificando na coluna se as listas tem esse elemento
+    novo_dataframe: pd.core.frame.DataFrame = novo_dataframe[novo_dataframe[coluna].apply(verificar_pertencimento)]
+    # Retorna o dataframe filtrado
+    return novo_dataframe

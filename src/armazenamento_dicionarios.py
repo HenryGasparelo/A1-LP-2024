@@ -15,16 +15,28 @@ dicionario_Employment = {
     "Retired": 0
 }
 
-dicionario_FormalEducation = {
-    'Some college/university study without earning a degree': 3,
-    'Associate degree': 4,
-    'Bachelor’s degree (BA, BS, B.Eng., etc.)': 7,
-    'Master’s degree (MA, MS, M.Eng., MBA, etc.)': 8,
-    'Professional degree (JD, MD, etc.)': 9,
-    'Other doctoral degree (Ph.D, Ed.D., etc.)': 10,
-    "I never completed any formal education": 0,
-    "Primary/elementary school": 1,
-    "Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)": 2
+dicionario_FormalEducation_hipotese4 = {
+    'Some college/university study without earning a degree': 'Nao possui ensino superior',
+    'Associate degree': 'Possui ensino superior',
+    'Bachelor’s degree (BA, BS, B.Eng., etc.)': 'Possui ensino superior',
+    'Master’s degree (MA, MS, M.Eng., MBA, etc.)': 'Possui ensino superior',
+    'Professional degree (JD, MD, etc.)': 'Possui ensino superior',
+    'Other doctoral degree (Ph.D, Ed.D., etc.)': 'Possui ensino superior',
+    "I never completed any formal education": 'Nao possui ensino superior',
+    "Primary/elementary school": 'Nao possui ensino superior',
+    "Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)": 'Nao possui ensino superior'
+}
+
+dicionario_FormalEducation_hipotese3 = {
+    'Some college/university study without earning a degree': 'Sem educacao formal',
+    'Associate degree': 'Educacao basica',
+    'Bachelor’s degree (BA, BS, B.Eng., etc.)': 'Graduacao',
+    'Master’s degree (MA, MS, M.Eng., MBA, etc.)': 'Mestrado',
+    'Professional degree (JD, MD, etc.)': 'Doutorado profissional',
+    'Other doctoral degree (Ph.D, Ed.D., etc.)': 'Doutorado',
+    "I never completed any formal education": 'Sem educacao formal',
+    "Primary/elementary school": 'Educacao basica',
+    "Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)": 'Educacao basica'
 }
 
 dicionario_YearsCoding = {

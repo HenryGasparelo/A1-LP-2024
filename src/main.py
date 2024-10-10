@@ -2,6 +2,7 @@ import manipulacao_csv as mc
 import tratamento_dados as td
 import preparacao_visualizacao as pv
 import armazenamento_dicionarios as ad
+import dataframes_hipoteses as dh
 import pandas as pd
 
 # Caminho para o arquivo csv com os dados do stack overflow
@@ -37,38 +38,14 @@ lista_colunas: list[str] = ["Student",
 dados_filtrados: pd.core.frame.DataFrame = mc.filtrar_colunas(dados, lista_colunas)
 
 # EXEMPLOS DAS NOVAS FUNCOES
-print(dados_filtrados)
 
-dados_tratados: pd.core.frame.DataFrame = td.tratamento_valores_faltantes(dados_filtrados, "YearsCoding", drop_faltantes=True)
-dados_tratados: pd.core.frame.DataFrame = td.tratamento_valores_faltantes(dados_tratados, "LanguageWorkedWith", drop_faltantes=True)
-dados_tratados: pd.core.frame.DataFrame = td.tratamento_lista_de_valores(dados_tratados, "LanguageWorkedWith")
-dados_tratados: pd.core.frame.DataFrame = td.tratamento_valores_faltantes(dados_tratados, "ConvertedSalary", drop_faltantes=True)
-dados_tratados: pd.core.frame.DataFrame = td.tratamento_valores_atipicos(dados_tratados, "ConvertedSalary", remover_zero=True, limite_superior_valores=2400000)
+print(dh.gerar_dataframe_hipotese1(dados))
+print(dh.gerar_dataframe_hipotese2(dados))
+print(dh.gerar_dataframe_hipotese3(dados))
+print(dh.gerar_dataframe_hipotese4(dados))
 
-print(dados_tratados["YearsCoding"])
-print(dados_tratados["LanguageWorkedWith"])
-print(dados_tratados["ConvertedSalary"])
+# TESTES DE SALARIO
 
-dados_tratados: pd.core.frame.DataFrame = td.tratamento_valores_faltantes(dados_tratados, "CareerSatisfaction", drop_faltantes=True)
-dados_modificados: pd.core.frame.DataFrame = pv.modificar_dados_usando_dicionario(dados_tratados, "CareerSatisfaction", ad.dicionario_CareerSatisfaction)
-
-print(dados_modificados["CareerSatisfaction"])
-
-dataframe_filtrado = mc.filtrar_linhas(dados, "Employment", 'Employed part-time', 'Employed full-time', "Independent contractor, freelancer, or self-employed")
-print(dataframe_filtrado["Employment"]) 
-
-print(pv.analise_unidimensional(dados_tratados, "ConvertedSalary"))
-coeficiente_de_correlacao = pv.analise_bidimensional(dados_modificados, "ConvertedSalary", "CareerSatisfaction")
-print(coeficiente_de_correlacao)
-
-dados_tratados: pd.core.frame.DataFrame = td.tratamento_valores_faltantes(dados_tratados, "HoursComputer", drop_faltantes=True)
-dados_tratados: pd.core.frame.DataFrame = pv.modificar_dados_usando_dicionario(dados_tratados, "HoursComputer", ad.dicionario_HoursComputer)
-dados_tratados: pd.core.frame.DataFrame = td.tratamento_valores_faltantes(dados_tratados, "HoursOutside", drop_faltantes=True)
-dados_tratados: pd.core.frame.DataFrame = pv.modificar_dados_usando_dicionario(dados_tratados, "HoursOutside", ad.dicionario_HoursOutside)
-dados_tratados: pd.core.frame.DataFrame = td.tratamento_valores_faltantes(dados_tratados, "SkipMeals", drop_faltantes=True)
-dados_tratados: pd.core.frame.DataFrame = pv.modificar_dados_usando_dicionario(dados_tratados, "SkipMeals", ad.dicionario_SkipMeals)
-dados_tratados: pd.core.frame.DataFrame = td.tratamento_valores_faltantes(dados_tratados, "Exercise", drop_faltantes=True)
-dados_tratados: pd.core.frame.DataFrame = pv.modificar_dados_usando_dicionario(dados_tratados, "Exercise", ad.dicionario_Exercise)
-dados_tratados = pv.criar_coluna_habitos_saudaveis(dados_tratados)
-print(dados_tratados["HabitosSaudaveis"])
-print(pv.calcular_empregabilidade(dados))
+dados = td.tratamento_valores_faltantes(dados, "ConvertedSalary")
+dados = td.tratamento_valores_atipicos(dados, "ConvertedSalary", limite_inferior_valores=2400, remover_zero=True, limite_superior_valores=600000)
+print(pv.analise_unidimensional(dados, "ConvertedSalary"))
