@@ -41,3 +41,4 @@ dados_filtrados: pd.core.frame.DataFrame = mc.filtrar_colunas(dados, lista_colun
 
 print(dh.gerar_dataframe_hipotese1(dados))
 print(dh.gerar_dataframe_hipotese2(dados))
+print(dh.gerar_dataframe_hipotese3(dados))
