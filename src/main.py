@@ -42,3 +42,10 @@ dados_filtrados: pd.core.frame.DataFrame = mc.filtrar_colunas(dados, lista_colun
 print(dh.gerar_dataframe_hipotese1(dados))
 print(dh.gerar_dataframe_hipotese2(dados))
 print(dh.gerar_dataframe_hipotese3(dados))
+print(dh.gerar_dataframe_hipotese4(dados))
+
+# TESTES DE SALARIO
+
+dados = td.tratamento_valores_faltantes(dados, "ConvertedSalary")
+dados = td.tratamento_valores_atipicos(dados, "ConvertedSalary", limite_inferior_valores=2400, remover_zero=True, limite_superior_valores=600000)
+print(pv.analise_unidimensional(dados, "ConvertedSalary"))

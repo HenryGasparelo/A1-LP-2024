@@ -78,8 +78,8 @@ def gerar_dataframe_hipotese2(dataframe: pd.core.frame.DataFrame) -> pd.core.fra
         dataframe_temporario = td.tratamento_lista_de_valores(dataframe_temporario, "LanguageWorkedWith")
         # Aplica o respectivo dicionario a coluna que precisa ser tratada
         dataframe_temporario = pv.modificar_dados_usando_dicionario(dataframe_temporario, "YearsCoding", ad.dicionario_YearsCoding)
-        # Trata os valores atipicos de salario, removendo aqueles que sao nulos ou superiores a 2400000
-        dataframe_temporario = td.tratamento_valores_atipicos(dataframe_temporario, "ConvertedSalary",remover_zero=True, limite_superior_valores=2400000)
+        # Trata os valores atipicos de salario, removendo aqueles que sao nulos, inferiores a 2400 e superiores a 600000
+        dataframe_temporario = td.tratamento_valores_atipicos(dataframe_temporario, "ConvertedSalary", limite_inferior_valores=2400 ,remover_zero=True, limite_superior_valores=600000)
         # Filtra apenas as linhas que possuem a linguagem da iteracao
         dataframe_temporario = mc.filtrar_linhas_por_um_elemento_em_lista(dataframe_temporario, "LanguageWorkedWith", linguagem)
         # Define uma nova coluna com a linguagem
@@ -133,3 +133,57 @@ def gerar_dataframe_hipotese3(dataframe: pd.core.frame.DataFrame) -> pd.core.fra
             dataframe_hipotese3.loc[len(dataframe_hipotese3)] = nova_linha
     # Retorna o dataframe da hipotese
     return dataframe_hipotese3
+
+def gerar_dataframe_hipotese4(dataframe: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
+    """
+    Funcao que recebe o dataframe principal e retorna um novo dataframe apenas com os dados que serao utilizados na hipotese 4.
+
+    Parameters
+    ----------
+    dataframe : pd.core.frame.DataFrame
+        Dataframe principal.
+
+    Returns
+    -------
+    dataframe_hipotese4 : pd.core.frame.DataFrame
+        Dataframe apenas com os dados que serao utilizados na hipotese.
+
+    """
+    # Cria um dataframe vazio apenas com as colunas que serao utilizadas
+    dataframe_hipotese4: pd.core.frame.DataFrame = pd.DataFrame(columns=["EnsinoSuperior", "TipoAutoAprendizado", "QuantidadeDeLinguagens"])
+    # Filtra o dataframe principal apenas com as colunas base
+    dataframe_filtrado: pd.core.frame.DataFrame = mc.filtrar_colunas(dataframe, ["FormalEducation", "SelfTaughtTypes", "LanguageWorkedWith"])
+    # Remove os valores faltantes
+    dataframe_filtrado = dataframe_filtrado.dropna()
+    # Aplica os dicionarios as colunas que precisam deste tratamento
+    dataframe_filtrado = pv.modificar_dados_usando_dicionario(dataframe_filtrado, "FormalEducation", ad.dicionario_FormalEducation_hipotese4)
+    # Transforma os dados em formato de lista em lista de python
+    dataframe_filtrado = td.tratamento_lista_de_valores(dataframe_filtrado, "SelfTaughtTypes")
+    dataframe_filtrado = td.tratamento_lista_de_valores(dataframe_filtrado, "LanguageWorkedWith")
+    # Define a coluna de linguagem de programacao como o comprimento de cada lista, para conseguir analisar a quantidade de linguagens aprendidas
+    dataframe_filtrado["LanguageWorkedWith"] = dataframe_filtrado["LanguageWorkedWith"].apply(len)
+    # Cria listas com as diferentes formas de auto aprendizado e se possui ou nao ensino superior
+    lista_formacao_superior: list = ["Nao possui ensino superior", "Possui ensino superior"]
+    lista_formas_aprendizado: list = ["The official documentation and/or standards for the technology",
+                                "A book or e-book from O’Reilly, Apress, or a similar publisher",
+                                "Online developer communities other than Stack Overflow (ex. forums, listservs, IRC channels, etc.)",
+                                "A college/university computer science or software engineering book",
+                                "Internal Wikis, chat rooms, or documentation set up by my company for employees"]
+    # Para cada possibilidade de formacao e de forma de auto aprendizado cria uma copia do dataframe
+    for formacao in lista_formacao_superior:
+        for forma_aprendizado in lista_formas_aprendizado:
+            dataframe_copia: pd.core.frame.DataFrame = dataframe_filtrado.copy()
+            # Filtra apenas as linhas que possuem os elementos da iteracao
+            dataframe_copia = mc.filtrar_linhas_por_um_elemento_em_lista(dataframe_copia, "SelfTaughtTypes", forma_aprendizado)
+            dataframe_copia = mc.filtrar_linhas(dataframe_copia, "FormalEducation", formacao)
+            # Faz uma analise unidimensional da coluna de linguagem de programacao
+            analise_unidimensional: dict = pv.analise_unidimensional(dataframe_copia, "LanguageWorkedWith")
+            # Define a quantidade de linguagens como a media
+            quantidade_de_linguagens: float = analise_unidimensional["media"]
+            # Cria uma nova linha com a formacao, tipo de auto aprendizado e media de quantidade de linguagens aprendidas
+            nova_linha: dict = {"EnsinoSuperior": formacao, "TipoAutoAprendizado": forma_aprendizado, "QuantidadeDeLinguagens": quantidade_de_linguagens}
+            # Insere a linha no dataframe da hipotese
+            dataframe_hipotese4.loc[len(dataframe_hipotese4)] = nova_linha
+    # Retorna o dataframe da hipotese
+    return dataframe_hipotese4
+    
