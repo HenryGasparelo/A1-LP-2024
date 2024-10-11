@@ -113,6 +113,55 @@ class TestTratamentoValoresAtipicos(unittest.TestCase):
         resultado = td.tratamento_valores_atipicos(self.df, 'Valores', remover_zero=True, limite_inferior_valores=0, limite_superior_valores=20)
         esperado = pd.DataFrame({'Valores': [10, 20, 5]})
         pd.testing.assert_frame_equal(resultado, esperado)
+        
+class TestTratamentoListaDeValores(unittest.TestCase):
+    
+    def setUp(self):
+        # DataFrame de exemplo com valores separados por ponto e vírgula
+        self.df = pd.DataFrame({
+            'Valores': ['10;20;30', 'a;b;c', '1;2;3;4']
+        })
+    
+    def test_separacao_valores(self):
+        # Teste para verificar se os valores são separados corretamente em listas
+        resultado = td.tratamento_lista_de_valores(self.df, 'Valores')
+        esperado = pd.DataFrame({
+            'Valores': [['10', '20', '30'], ['a', 'b', 'c'], ['1', '2', '3', '4']]
+        })
+        pd.testing.assert_frame_equal(resultado, esperado)
+    
+    def test_coluna_com_espacos(self):
+        # Teste para verificar se valores com espaços ao redor são separados corretamente
+        df_com_espacos = pd.DataFrame({
+            'Valores': [' 10 ; 20 ; 30 ', ' a ; b ; c ', ' 1 ; 2 ; 3 ; 4 ']
+        })
+        resultado = td.tratamento_lista_de_valores(df_com_espacos, 'Valores')
+        esperado = pd.DataFrame({
+            'Valores': [[' 10 ', ' 20 ', ' 30 '], [' a ', ' b ', ' c '], [' 1 ', ' 2 ', ' 3 ', ' 4 ']]
+        })
+        pd.testing.assert_frame_equal(resultado, esperado)
+
+    def test_coluna_vazia(self):
+        # Teste com uma coluna contendo valores vazios
+        df_vazio = pd.DataFrame({
+            'Valores': ['', '', '']
+        })
+        resultado = td.tratamento_lista_de_valores(df_vazio, 'Valores')
+        esperado = pd.DataFrame({
+            'Valores': [[''], [''], ['']]
+        })
+        pd.testing.assert_frame_equal(resultado, esperado)
+
+    def test_coluna_sem_separador(self):
+        # Teste para valores que não contêm o separador ";", retornando lista com o próprio valor
+        df_sem_separador = pd.DataFrame({
+            'Valores': ['100', 'abc', '42']
+        })
+        resultado = td.tratamento_lista_de_valores(df_sem_separador, 'Valores')
+        esperado = pd.DataFrame({
+            'Valores': [['100'], ['abc'], ['42']]
+        })
+        pd.testing.assert_frame_equal(resultado, esperado)
 
 if __name__ == '__main__':
     unittest.main()
