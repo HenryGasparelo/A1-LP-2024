@@ -16,7 +16,7 @@ sns.set_theme()
 df = pd.DataFrame(dh.gerar_dataframe_hipotese1(mn.dados))
 
 # Usar pivot_table para agregar valores duplicados (por exemplo, usando a média)
-df_p = df.pivot_table(index="YearsCoding", columns="LinguagemProgramacao", values="HabitosSaudaveis", aggfunc="mean")
+df_p = df.pivot_table(index="AnosCodando", columns="LinguagemProgramacao", values="HabitosSaudaveis", aggfunc="mean")
 
 #inverter os anos
 df_p = df_p.sort_index(ascending=False)
@@ -24,10 +24,10 @@ df_p = df_p.sort_index(ascending=False)
 # Criar o heatmap
 f, ax = plt.subplots(figsize=(9, 6))
 
-sns.heatmap(df_p, annot=True, fmt=".2f",cmap="magma_r" , ax=ax)
+sns.heatmap(df_p, annot=True, fmt=".2f",cmap="magma" , ax=ax)
 
-plt.xlabel("Anos Codando", labelpad=15)  # Espaçamento do rótulo do eixo X
-plt.ylabel("Linguagem Programacao", labelpad=15)  # Espaçamento do rótulo do eixo Y
+plt.xlabel("Linguagem Usadas", labelpad=17)  # Espaçamento do rótulo do eixo X
+plt.ylabel("Anos Codando", labelpad=17)  # Espaçamento do rótulo do eixo Y
 
 
 """

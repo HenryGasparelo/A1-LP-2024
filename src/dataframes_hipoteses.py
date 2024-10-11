@@ -56,7 +56,7 @@ def gerar_dataframe_hipotese1(dataframe: pd.core.frame.DataFrame) -> pd.core.fra
     # Retorna o dataframe da hipotese
     return dataframe_hipotese1
 
-def gerar_dataframe_hipotese2(dataframe: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
+def gerar_dataframe_hipotese2_modelo_extra(dataframe: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
     """
     Funcao que recebe o dataframe principal e retorna um novo dataframe apenas com os dados que serao utilizados na hipotese 2.
 
@@ -84,8 +84,8 @@ def gerar_dataframe_hipotese2(dataframe: pd.core.frame.DataFrame) -> pd.core.fra
         dataframe_temporario = td.tratamento_lista_de_valores(dataframe_temporario, "LanguageWorkedWith")
         # Aplica o respectivo dicionario a coluna que precisa ser tratada
         dataframe_temporario = pv.modificar_dados_usando_dicionario(dataframe_temporario, "YearsCoding", ad.dicionario_YearsCoding)
-        # Trata os valores atipicos de salario, removendo aqueles que sao nulos, inferiores a 2400 e superiores a 600000
-        dataframe_temporario = td.tratamento_valores_atipicos(dataframe_temporario, "ConvertedSalary", limite_inferior_valores=2400 ,remover_zero=True, limite_superior_valores=600000)
+        # Trata os valores atipicos de salario, removendo aqueles que sao nulos, inferiores a 2400 e superiores a 200000
+        dataframe_temporario = td.tratamento_valores_atipicos(dataframe_temporario, "ConvertedSalary", limite_inferior_valores=2400 ,remover_zero=True, limite_superior_valores=200000)
         # Filtra apenas as linhas que possuem a linguagem da iteracao
         dataframe_temporario = mc.filtrar_linhas_por_um_elemento_em_lista(dataframe_temporario, "LanguageWorkedWith", linguagem)
         # Define uma nova coluna com a linguagem
@@ -193,7 +193,21 @@ def gerar_dataframe_hipotese4(dataframe: pd.core.frame.DataFrame) -> pd.core.fra
     # Retorna o dataframe da hipotese
     return dataframe_hipotese4
     
-def gerar_dataframe_hipotese1_original(dataframe):
+def gerar_dataframe_hipotese1_original(dataframe: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
+    """
+    Funcao que recebe o dataframe principal e retorna um novo dataframe apenas com os dados que serao utilizados na hipotese 1 original.
+
+    Parameters
+    ----------
+    dataframe : pd.core.frame.DataFrame
+        Dataframe principal.
+
+    Returns
+    -------
+    dataframe_hipotese1_original : pd.core.frame.DataFrame
+        Dataframe apenas com os dados que serao utilizados na hipotese 1 original.
+
+    """
     # Cria um dataframe vazio apenas com as colunas que serao utilizadas
     dataframe_hipotese1_original: pd.core.frame.DataFrame = pd.DataFrame(columns=["Satisfacao", "AnosCodando", "SalarioMedio"])
     # Filtra o dataframe principal apenas com as colunas base
@@ -203,8 +217,8 @@ def gerar_dataframe_hipotese1_original(dataframe):
     # Aplica os dicionarios as colunas que precisam deste tratamento
     dataframe_filtrado = pv.modificar_dados_usando_dicionario(dataframe_filtrado, "CareerSatisfaction", ad.dicionario_CareerSatisfaction)
     dataframe_filtrado = pv.modificar_dados_usando_dicionario(dataframe_filtrado, "YearsCoding", ad.dicionario_YearsCoding)
-    # Trata os valores atipicos de salario, removendo aqueles que sao nulos, inferiores a 2400 e superiores a 600000
-    dataframe_filtrado = td.tratamento_valores_atipicos(dataframe_filtrado, "ConvertedSalary", limite_inferior_valores=2400 ,remover_zero=True, limite_superior_valores=600000)
+    # Trata os valores atipicos de salario, removendo aqueles que sao nulos, inferiores a 2400 e superiores a 200000
+    dataframe_filtrado = td.tratamento_valores_atipicos(dataframe_filtrado, "ConvertedSalary", limite_inferior_valores=2400 ,remover_zero=True, limite_superior_valores=200000)
     # Cria listas com os niveis de satisfacao
     lista_niveis_satisfacao = ["Alto", "Medio", "Baixo"]
     # Lista de possiveis anos codando
@@ -225,7 +239,63 @@ def gerar_dataframe_hipotese1_original(dataframe):
             # Insere a linha no dataframe da hipotese
             dataframe_hipotese1_original.loc[len(dataframe_hipotese1_original)] = nova_linha
             
+    # Retorna o dataframe da hipotese
     return dataframe_hipotese1_original
+
+def gerar_dataframe_hipotese2(dataframe: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
+    """
+    Funcao que recebe o dataframe principal e retorna um novo dataframe apenas com os dados que serao utilizados na hipotese 2.
+
+    Parameters
+    ----------
+    dataframe : pd.core.frame.DataFrame
+        Dataframe principal.
+
+    Returns
+    -------
+    dataframe_hipotese2 : pd.core.frame.DataFrame
+        Dataframe apenas com os dados que serao utilizados na hipotese.
+
+    """
+    # Cria um novo dataframe, sem dados, apenas com as colunas que serao usadas na hipotese
+    dataframe_hipotese2: pd.core.frame.DataFrame = pd.DataFrame(columns=["PeriodoCodando", "Salario", "LinguagemProgramacao"])
+    # Cria uma lista com as linguagens de programacao a serem analisadas
+    linguagens: list = ["Python", "JavaScript", "C", "Java"]
+    # Dataframe apenas com as colunas base
+    dataframe_temporario: pd.core.frame.DataFrame = mc.filtrar_colunas(dataframe, ["LanguageWorkedWith", "YearsCoding", "ConvertedSalary"])
+    # Remove os valores faltantes
+    dataframe_temporario = dataframe_temporario.dropna()
+    # Trata as listas de linguagens para listas em python
+    dataframe_temporario = td.tratamento_lista_de_valores(dataframe_temporario, "LanguageWorkedWith")
+    # Aplica o respectivo dicionario a coluna que precisa ser tratada
+    dataframe_temporario = pv.modificar_dados_usando_dicionario(dataframe_temporario, "YearsCoding", ad.dicionario_YearsCoding)
+    # Trata os valores atipicos de salario, removendo aqueles que sao nulos, inferiores a 2400 e superiores a 200000
+    dataframe_temporario = td.tratamento_valores_atipicos(dataframe_temporario, "ConvertedSalary", limite_inferior_valores=2400 ,remover_zero=True, limite_superior_valores=200000)
+    dataframe_temporario = dataframe_temporario.sort_values(by="ConvertedSalary", ascending=True)
+    # Para cada linguagem e para cada um dos percentis, cria uma copia do dataframe
+    for linguagem in linguagens:
+        for i in range(1,101):
+            dataframe_copia: pd.core.frame.DataFrame = dataframe_temporario.copy()
+            # Filtra apenas as colunas base
+            dataframe_copia = mc.filtrar_linhas_por_um_elemento_em_lista(dataframe_copia, "LanguageWorkedWith", linguagem)
+            # Define limites inferior e superior para o intervalo
+            limite_inferior: int = int(len(dataframe_copia) * (0.01 * (i-1)))
+            limite_superior: int = int(len(dataframe_copia) * (0.01 * i))
+            # Cria um novo pedaco do dataframe original apenas com as linhas que obedecem os limites inferior e superior
+            pedaco_do_dataframe: pd.core.frame.DataFrame = dataframe_copia.iloc[limite_inferior:limite_superior]
+            # Faz uma analise unidimensional da coluna de anos codando
+            analise: dict = pv.analise_unidimensional(pedaco_do_dataframe, "YearsCoding")
+            # Define o periodo codando medio como a media do periodo codando
+            periodo_codando_medio: float = analise["media"]
+            # Define o salario como o percentil da iteracao
+            salario: float = np.quantile(dataframe_copia["ConvertedSalary"], 0.01*i)
+            # Cria uma nova linha com o periodo codando, o salario e a linguagem da iteracao
+            nova_linha: dict = {"PeriodoCodando": periodo_codando_medio, "Salario": salario, "LinguagemProgramacao": linguagem}
+            # Adiciona a linha ao dataframe da hipotese
+            dataframe_hipotese2.loc[len(dataframe_hipotese2)] = nova_linha
+            
+    # Retorna o dataframe da hipotese
+    return dataframe_hipotese2
             
             
     

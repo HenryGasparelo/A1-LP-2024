@@ -1,4 +1,4 @@
-#Exemplo de grafo de linhas
+#Plot3 Grafo de linhas
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
@@ -33,6 +33,8 @@ plt.ylabel("Empregabilidade", labelpad=15)  # Espaçamento do rótulo do eixo Y
 plt.legend(title="Níveis Educacionais", title_fontsize=14, fontsize=12, loc="lower center")
 
 
+# Mostrar o gráfico
+plt.show()
 
 
 # Mostrar o gráfico
