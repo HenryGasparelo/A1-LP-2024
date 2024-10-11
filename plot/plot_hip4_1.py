@@ -11,6 +11,9 @@ sys.path.append('../src')
 import dataframes_hipoteses as dh
 import main as mn
 
+#tema de fundo
+sns.set_theme(style="whitegrid")
+
 #dataframe
 df = pd.DataFrame(dh.gerar_dataframe_hipotese1_original(mn.dados))
 
