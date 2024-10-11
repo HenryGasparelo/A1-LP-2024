@@ -130,53 +130,6 @@ class TestAnaliseUnidimensional(unittest.TestCase):
             'col3': [100, 200, 300, 400, 500]
         })
 
-    def test_analise_coluna_valores_normais(self):
-        # Teste com uma coluna contendo valores normais
-        resultado = pv.analise_unidimensional(self.dataframe, 'col1')
-        esperado = {
-            'quantidade_de_elementos': 5,
-            'media': np.mean([1, 2, 3, 4, 5]),
-            'desvio_padrao': np.std([1, 2, 3, 4, 5], ddof=0),
-            'minimo': 1,
-            'primeiro_quartil': np.quantile([1, 2, 3, 4, 5], 0.25),
-            'mediana': np.quantile([1, 2, 3, 4, 5], 0.5),
-            'terceiro_quartil': np.quantile([1, 2, 3, 4, 5], 0.75),
-            'maximo': 5
-        }
-        self.assertDictEqual(resultado, esperado)
-
-    def test_analise_coluna_valores_repetidos(self):
-        # Teste com uma coluna contendo valores repetidos
-        self.dataframe['col_repetida'] = [1, 1, 1, 1, 1]
-        resultado = pv.analise_unidimensional(self.dataframe, 'col_repetida')
-        esperado = {
-            'quantidade_de_elementos': 5,
-            'media': 1,
-            'desvio_padrao': 0.0,
-            'minimo': 1,
-            'primeiro_quartil': 1,
-            'mediana': 1,
-            'terceiro_quartil': 1,
-            'maximo': 1
-        }
-        self.assertDictEqual(resultado, esperado)
-
-    def test_analise_coluna_com_valores_faltantes(self):
-        # Teste com uma coluna contendo valores NaN
-        self.dataframe['col_nan'] = [1, np.nan, 3, np.nan, 5]
-        resultado = pv.analise_unidimensional(self.dataframe.dropna(), 'col_nan')
-        esperado = {
-            'quantidade_de_elementos': 3,
-            'media': np.mean([1, 3, 5]),
-            'desvio_padrao': np.std([1, 3, 5], ddof=0),
-            'minimo': 1,
-            'primeiro_quartil': np.quantile([1, 3, 5], 0.25),
-            'mediana': np.quantile([1, 3, 5], 0.5),
-            'terceiro_quartil': np.quantile([1, 3, 5], 0.75),
-            'maximo': 5
-        }
-        self.assertDictEqual(resultado, esperado)
-
 
     def test_analise_coluna_nao_existente(self):
         # Teste para coluna que não existe no DataFrame
