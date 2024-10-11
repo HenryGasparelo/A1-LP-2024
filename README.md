@@ -5,7 +5,7 @@
 Nesta seção, apresentaremos as visualizações gráficas que ilustram os dados analisados para cada hipótese do projeto. As plotagens são ferramentas fundamentais para explorar e entender os padrões nos dados, facilitando a interpretação e extração de insights. Para cada hipótese, utilizaremos diferentes tipos de gráficos adequados para destacar as relações e tendências presentes.
 
 
-1. **Hipótese 1:** Índices de Hábitos Saudáveis entre Programadores.
+* **Hipótese 1:** Índices de Hábitos Saudáveis entre Programadores.
   
   Para esta hipótese, utilizamos um heatmap (mapa de calor) onde o eixo X representa as faixas de anos de experiência e o eixo Y as linguagens de programação ("C", "Java", "JavaScript" e "Python"). O gradiente de cores reflete o índice de saúde, permitindo a visualização de como esse índice varia em função do tempo de experiência e da linguagem utilizada.
 
@@ -16,7 +16,7 @@ Nesta seção, apresentaremos as visualizações gráficas que ilustram os dados
 </div>
 
   
-2. **Hipótese 2:** Crescimento Salarial entre Programadores de Python e Java/C
+* **Hipótese 2:** Crescimento Salarial entre Programadores de Python e Java/C
    
    Para a hipótese 2, utilizamos um gráfico de dispersão para analisar os dados salariais de programadores, divididos em grupos conforme as linguagens de programação em seu repertório: Python, JavaScript, C, Java ou aqueles que utilizam duas ou mais dessas linguagens. No gráfico, o eixo X representa os anos de experiência e o eixo Y o salário anual (em USD). Adicionamos uma linha de tendência para cada grupo, facilitando a comparação do crescimento salarial ao longo do tempo.
 
@@ -26,3 +26,13 @@ Nesta seção, apresentaremos as visualizações gráficas que ilustram os dados
 <div style="text-align: center;">
   <img src="grafos/hipotese_2.png" alt="Gráfico de Disperssão" width="500"/>
 </div>
+
+* **Hipótese 3:** Grau de Formação e Empregabilidade.
+
+   A escolha do gráfico de linhas para a hipótese 3 se justifica pela sua capacidade de representar visualmente dados contínuos e a evolução de variáveis ao longo do tempo. Neste contexto, utilizamos o gráfico para ilustrar a proporção de programadores empregados em relação ao total, categorizando-os conforme seu grau de formação. O eixo X representa a experiência em anos, enquanto o eixo Y quantifica a proporção de empregabilidade.
+   
+   Essa representação permite não apenas a observação de tendências e padrões na empregabilidade em diferentes níveis de formação, mas também a identificação de possíveis correlações entre a experiência e a empregabilidade. A suavização das linhas facilita a visualização das flutuações nos dados, permitindo uma análise mais clara de como cada grau de formação pode impactar a empregabilidade ao longo da carreira profissional.
+
+<div style="text-align: center;">
+  <img src="grafos/hipotese_3.png" alt="Gráfico de Linhas" width="500"/>
+</div> 
