@@ -59,6 +59,9 @@ def tratamento_valores_faltantes(dataframe: pd.core.frame.DataFrame, coluna: str
     elif fill_faltantes:
         dataframe_tratado = dataframe_tratado.fillna(subset=[coluna], value=valor_fill)
     
+    # Redefine os indices do dataframe tratado (alteracao por isaias)
+    dataframe_tratado = dataframe_tratado.reset_index(drop=True)
+    
     # Retorna o dataframe tratado
     return dataframe_tratado
 

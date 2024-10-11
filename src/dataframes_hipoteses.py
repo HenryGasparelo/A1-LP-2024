@@ -140,7 +140,7 @@ def gerar_dataframe_hipotese3(dataframe: pd.core.frame.DataFrame) -> pd.core.fra
     # Retorna o dataframe da hipotese
     return dataframe_hipotese3
 
-def gerar_dataframe_hipotese4(dataframe: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
+def gerar_dataframe_hipotese4_alternativa(dataframe: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
     """
     Funcao que recebe o dataframe principal e retorna um novo dataframe apenas com os dados que serao utilizados na hipotese 4.
 
@@ -193,7 +193,7 @@ def gerar_dataframe_hipotese4(dataframe: pd.core.frame.DataFrame) -> pd.core.fra
     # Retorna o dataframe da hipotese
     return dataframe_hipotese4
     
-def gerar_dataframe_hipotese1_original(dataframe: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
+def gerar_dataframe_hipotese4(dataframe: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
     """
     Funcao que recebe o dataframe principal e retorna um novo dataframe apenas com os dados que serao utilizados na hipotese 1 original.
 
@@ -297,5 +297,6 @@ def gerar_dataframe_hipotese2(dataframe: pd.core.frame.DataFrame) -> pd.core.fra
     # Retorna o dataframe da hipotese
     return dataframe_hipotese2
             
+
             
     

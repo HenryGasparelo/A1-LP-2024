@@ -75,6 +75,8 @@ def analise_unidimensional(dataframe: pd.core.frame.DataFrame, coluna: str) -> d
     analise: dict = {"quantidade_de_elementos": len(serie),
     # Define a media como a media aritmetica calculada usando o Numpy
     "media": np.mean(serie),
+    # Define a variancia calculada usando o Numpy
+    "variancia": np.var(serie, ddof=0),
     # Define o desvio padrao calculado usando o Numpy
     "desvio_padrao": np.std(serie, ddof=0),
     # Define o minimo, calculado usando o Numpy
@@ -179,3 +181,47 @@ def calcular_empregabilidade(dataframe: pd.core.frame.DataFrame) -> float:
     empregabilidade = quantidade_empregados / quantidade_programadores
     # Retorna a empregabilidade
     return empregabilidade
+
+def calcular_r2(dataframe: pd.core.frame.DataFrame, coluna_quanti: str, coluna_quali: str, lista_categorias: list) -> float:
+    """
+    Funcao que pega um dataframe uma coluna de dados quantitativos e uma coluna de qualitativos, alem  de uma lista de categorias e retorna o r2.
+
+    Parameters
+    ----------
+    dataframe : pd.core.frame.DataFrame
+        Dataframe com todos os dados.
+    coluna_quanti : str
+        Coluna de dados quantitativos.
+    coluna_quali : str
+        Coluna de dados qualitativos.
+    lista_categorias : list
+        Lista de categorias.
+
+    Returns
+    -------
+    float
+        r2 calculado como 1 menos a razao entre a variancia media (media ponderada das variancias onde as frequencias sao os pesos) pela variancia de todos os dados.
+
+    """
+    # Encontra a quantidade dos dados
+    quantidade_de_dados = len(dataframe[coluna_quali])
+    # Define o var_medio, a principio, como 0
+    var_medio = 0
+    # Cria uma analisa geral de todos os dados e coleta a variancia
+    analise_geral = analise_unidimensional(dataframe, coluna_quanti)
+    var_total = analise_geral["variancia"]
+    # Para cada categoria, cria uma copia do dataframe e filtra apenas as linhas da categoria
+    for categoria in lista_categorias:
+        dataframe_copia = dataframe.copy()
+        dataframe_copia = mc.filtrar_linhas(dataframe, coluna_quali, categoria)
+        # Encontra a quantidade de dados naquela categoria
+        quantidade_de_dados_por_categoria = len(dataframe_copia[coluna_quali])
+        # Faz a analise unidimensional do dataframe da categoria e coleta a variancia
+        analise_por_categoria = analise_unidimensional(dataframe_copia, coluna_quanti)
+        var_por_categoria = analise_por_categoria["variancia"]
+        # Soma o produto da frequencia relativa pela variancia a variancia media
+        var_medio += (quantidade_de_dados_por_categoria / quantidade_de_dados) * var_por_categoria
+        
+    # Calcula o r2 como 1 menos a razao entre a variancia media e a de todos os dados, e retorna o r2
+    r2 = 1 - (var_medio/var_total)
+    return r2
