@@ -59,8 +59,6 @@ def tratamento_valores_faltantes(dataframe: pd.core.frame.DataFrame, coluna: str
     elif fill_faltantes:
         dataframe_tratado = dataframe_tratado.fillna(subset=[coluna], value=valor_fill)
     
-    # Redefine os indices do dataframe tratado (alteracao por isaias)
-    dataframe_tratado = dataframe_tratado.reset_index(drop=True)
     
     # Retorna o dataframe tratado
     return dataframe_tratado
@@ -97,6 +95,8 @@ def tratamento_valores_atipicos(dataframe: pd.core.frame.DataFrame, coluna: str,
     
     # Independente da remocao ou nao dos valores nulos, filtra apenas os valores que sao maiores ou iguais ao limite inferior e menores ou iguais as limite superior.
     dataframe_tratado = dataframe_tratado[(dataframe_tratado[coluna] >= limite_inferior_valores) & (dataframe_tratado[coluna] <= limite_superior_valores)]
+    # Redefine os índices do dataframe tratado
+    dataframe_tratado = dataframe_tratado.reset_index(drop=True)
     # Retorna o dataframe tratado
     return dataframe_tratado
 
