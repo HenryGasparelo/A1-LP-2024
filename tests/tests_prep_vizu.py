@@ -1,3 +1,4 @@
+"""Testes das funções preparacao_visualizacao"""
 import unittest
 import os
 import sys
@@ -120,21 +121,7 @@ class TestModificarDadosUsandoDicionario(unittest.TestCase):
         })
         pd.testing.assert_frame_equal(resultado, esperado, check_dtype=True)
         
-class TestAnaliseUnidimensional(unittest.TestCase):
 
-    def setUp(self):
-        # DataFrame de exemplo para os testes
-        self.dataframe = pd.DataFrame({
-            'col1': [1, 2, 3, 4, 5],
-            'col2': [10, 20, 30, 40, 50],
-            'col3': [100, 200, 300, 400, 500]
-        })
-
-
-    def test_analise_coluna_nao_existente(self):
-        # Teste para coluna que não existe no DataFrame
-        with self.assertRaises(KeyError):
-            pv.analise_unidimensional(self.dataframe, 'col_inexistente')
             
 class TestAnaliseBidimensional(unittest.TestCase):
 
@@ -290,6 +277,35 @@ class TestCalcularEmpregabilidade(unittest.TestCase):
         resultado = pv.calcular_empregabilidade(dataframe_invalido)
         # Total de programadores: 3, empregados: 0
         self.assertAlmostEqual(resultado, 0.0, places=2)
+        
+class TestAnaliseUnidimensional(unittest.TestCase):
+    def setUp(self):
+        # Criação de um dataframe exemplo para os testes
+        dados = {'valores': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+        self.df = pd.DataFrame(dados)
+
+    def test_analise_unidimensional(self):
+        # Chama a função e coleta os resultados
+        resultado = pv.analise_unidimensional(self.df, 'valores')
+        
+        # Verifica o número de elementos
+        self.assertEqual(resultado['quantidade_de_elementos'], 10)
+        # Verifica a média
+        self.assertAlmostEqual(resultado['media'], np.mean(self.df['valores']))
+        # Verifica a variância
+        self.assertAlmostEqual(resultado['variancia'], np.var(self.df['valores'], ddof=0))
+        # Verifica o desvio padrão
+        self.assertAlmostEqual(resultado['desvio_padrao'], np.std(self.df['valores'], ddof=0))
+        # Verifica o mínimo
+        self.assertEqual(resultado['minimo'], np.min(self.df['valores']))
+        # Verifica o primeiro quartil
+        self.assertAlmostEqual(resultado['primeiro_quartil'], np.quantile(self.df['valores'], 0.25))
+        # Verifica a mediana
+        self.assertAlmostEqual(resultado['mediana'], np.quantile(self.df['valores'], 0.5))
+        # Verifica o terceiro quartil
+        self.assertAlmostEqual(resultado['terceiro_quartil'], np.quantile(self.df['valores'], 0.75))
+        # Verifica o máximo
+        self.assertEqual(resultado['maximo'], np.max(self.df['valores']))
 
 if __name__ == '__main__':
     unittest.main(verbosity=3)

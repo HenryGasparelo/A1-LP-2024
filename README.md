@@ -46,3 +46,21 @@ A escolha do gráfico de linhas se justifica por sua capacidade de representar t
 <div style="text-align: center;">
   <img src="grafos/hipotese_4.png" alt="Gráfico de Linhas Empilhadas com Marcadores" width="500"/>
 </div> 
+
+## Testes:
+
+Nesta seção, serão tratados os testes utilizados para verificar os principais métodos de nosso código. Todas as principais funções foram devidamente testadas e aplicadas em seu fim último com sucesso, mas por redundância, foram elaborados testes a fim de testar as funções em casos mais gerais e isolados que envolvam problemáticas semelhantes.
+
+Todos os arquivos relacionados aos testes estão no diretório `\tests`. Nele estão contidos os arquivos `tests_main.py`,`tests_manip_csv.py`, `tests_prep_vizu.py`, `tests_trat_dados.py` e o subdiretório `arquivos_testes`  
+
+**O arquivo `tests_main.py`** executa todos os demais testes de uma só vez. Basta executá-lo. 
+
+Caso queira executar um determinado grupo de testes separado, há três opções:
+
+**O arquivo `tests_manip_csv.py`** trata dos testes atrelados ao arquivo `src\manipulacao_csv.py`, que consiste em funções que tratam de receber um arquivo CSV e realizar sua leitura e conversão para um DataFrame em Pandas. Aqui são utilizados os arquivos do diretório `arquivos_testes`, que contem alguns arquivos em CSV com diferentes variações para que sejam testadas as capacidades de leitura e análise desses arquivos mediantes certas circunstâncias.
+
+**O arquivo `tests_trat_dados.py`** trata dos testes atrelados ao arquivo `src\tratamento_dados.py` que contém funções que manipulam DataFrames Pandas para atualizar dados, limpá-los e permitir sua análise. 
+
+**O arquivo `tests_prep_vizu.py`** trata dos testes atrelados ao arquivo `src\preparacao_visualizacao.py` que contém funções que, a partir das bases de dados preparadas, criam os indicadores utilizados na Análise Exploratória e na plotagem dos gráficos, que serão fundamentais para a conclusão do trabalho
+
+
