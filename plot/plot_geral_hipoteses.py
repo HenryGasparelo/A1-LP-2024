@@ -1,7 +1,10 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
+import sys
 
+# Para poder importar o módulo a partir do diretório '../src'
+sys.path.append('../src')
 
 import manipulacao_csv as mc
 import tratamento_dados as td
