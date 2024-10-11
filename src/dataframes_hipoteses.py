@@ -84,8 +84,8 @@ def gerar_dataframe_hipotese2_modelo_extra(dataframe: pd.core.frame.DataFrame) -
         dataframe_temporario = td.tratamento_lista_de_valores(dataframe_temporario, "LanguageWorkedWith")
         # Aplica o respectivo dicionario a coluna que precisa ser tratada
         dataframe_temporario = pv.modificar_dados_usando_dicionario(dataframe_temporario, "YearsCoding", ad.dicionario_YearsCoding)
-        # Trata os valores atipicos de salario, removendo aqueles que sao nulos, inferiores a 2400 e superiores a 600000
-        dataframe_temporario = td.tratamento_valores_atipicos(dataframe_temporario, "ConvertedSalary", limite_inferior_valores=2400 ,remover_zero=True, limite_superior_valores=600000)
+        # Trata os valores atipicos de salario, removendo aqueles que sao nulos, inferiores a 2400 e superiores a 200000
+        dataframe_temporario = td.tratamento_valores_atipicos(dataframe_temporario, "ConvertedSalary", limite_inferior_valores=2400 ,remover_zero=True, limite_superior_valores=200000)
         # Filtra apenas as linhas que possuem a linguagem da iteracao
         dataframe_temporario = mc.filtrar_linhas_por_um_elemento_em_lista(dataframe_temporario, "LanguageWorkedWith", linguagem)
         # Define uma nova coluna com a linguagem
@@ -217,8 +217,8 @@ def gerar_dataframe_hipotese1_original(dataframe: pd.core.frame.DataFrame) -> pd
     # Aplica os dicionarios as colunas que precisam deste tratamento
     dataframe_filtrado = pv.modificar_dados_usando_dicionario(dataframe_filtrado, "CareerSatisfaction", ad.dicionario_CareerSatisfaction)
     dataframe_filtrado = pv.modificar_dados_usando_dicionario(dataframe_filtrado, "YearsCoding", ad.dicionario_YearsCoding)
-    # Trata os valores atipicos de salario, removendo aqueles que sao nulos, inferiores a 2400 e superiores a 600000
-    dataframe_filtrado = td.tratamento_valores_atipicos(dataframe_filtrado, "ConvertedSalary", limite_inferior_valores=2400 ,remover_zero=True, limite_superior_valores=600000)
+    # Trata os valores atipicos de salario, removendo aqueles que sao nulos, inferiores a 2400 e superiores a 200000
+    dataframe_filtrado = td.tratamento_valores_atipicos(dataframe_filtrado, "ConvertedSalary", limite_inferior_valores=2400 ,remover_zero=True, limite_superior_valores=200000)
     # Cria listas com os niveis de satisfacao
     lista_niveis_satisfacao = ["Alto", "Medio", "Baixo"]
     # Lista de possiveis anos codando
@@ -269,8 +269,8 @@ def gerar_dataframe_hipotese2(dataframe: pd.core.frame.DataFrame) -> pd.core.fra
     dataframe_temporario = td.tratamento_lista_de_valores(dataframe_temporario, "LanguageWorkedWith")
     # Aplica o respectivo dicionario a coluna que precisa ser tratada
     dataframe_temporario = pv.modificar_dados_usando_dicionario(dataframe_temporario, "YearsCoding", ad.dicionario_YearsCoding)
-    # Trata os valores atipicos de salario, removendo aqueles que sao nulos, inferiores a 2400 e superiores a 600000
-    dataframe_temporario = td.tratamento_valores_atipicos(dataframe_temporario, "ConvertedSalary", limite_inferior_valores=2400 ,remover_zero=True, limite_superior_valores=600000)
+    # Trata os valores atipicos de salario, removendo aqueles que sao nulos, inferiores a 2400 e superiores a 200000
+    dataframe_temporario = td.tratamento_valores_atipicos(dataframe_temporario, "ConvertedSalary", limite_inferior_valores=2400 ,remover_zero=True, limite_superior_valores=200000)
     dataframe_temporario = dataframe_temporario.sort_values(by="ConvertedSalary", ascending=True)
     # Para cada linguagem e para cada um dos percentis, cria uma copia do dataframe
     for linguagem in linguagens:
