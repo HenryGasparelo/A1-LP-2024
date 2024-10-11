@@ -26,8 +26,8 @@ f, ax = plt.subplots(figsize=(9, 6))
 
 sns.heatmap(df_p, annot=True, fmt=".2f",cmap="magma" , ax=ax)
 
-plt.xlabel("Anos Codando", labelpad=15)  # Espaçamento do rótulo do eixo X
-plt.ylabel("Linguagem Programacao", labelpad=15)  # Espaçamento do rótulo do eixo Y
+plt.xlabel("Linguagem Usadas", labelpad=17)  # Espaçamento do rótulo do eixo X
+plt.ylabel("Anos Codando", labelpad=17)  # Espaçamento do rótulo do eixo Y
 
 
 """
