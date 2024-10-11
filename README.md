@@ -10,6 +10,8 @@ Nesta seção, apresentaremos as visualizações gráficas que ilustram os dados
   Para esta hipótese, utilizamos um heatmap (mapa de calor) onde o eixo X representa as faixas de anos de experiência e o eixo Y as linguagens de programação ("C", "Java", "JavaScript" e "Python"). O gradiente de cores reflete o índice de saúde, permitindo a visualização de como esse índice varia em função do tempo de experiência e da linguagem utilizada.
 
   Essa forma de visualização foi escolhida porque o uso do gradiente facilita a identificação de padrões. Assim, é possível obter uma visão clara de como diferentes grupos se comportam com relação ao índice de saúde conforme a experiência e a linguagem de programação.
+
+![Heatmap (Mapa de Calor)](grafo/hipotese_1.png)
   
 2. **Hipótese 2:** Crescimento Salarial entre Programadores de Python e Java/C
    
@@ -17,3 +19,4 @@ Nesta seção, apresentaremos as visualizações gráficas que ilustram os dados
 
    A escolha do gráfico de dispersão foi feita porque ele permite uma análise clara da relação entre multivariáveis contínuas, no caso, o tempo de experiência e o salário. Além disso, a dispersão dos pontos proporciona uma visão detalhada das variações individuais dentro de cada grupo, enquanto as linhas de tendência auxiliam na identificação de padrões gerais de crescimento salarial ao longo do tempo.
  
+![Grafo de Disperssão](grafo/hipotese_2.png)
