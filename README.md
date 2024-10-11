@@ -12,7 +12,7 @@ Nesta seção, apresentaremos as visualizações gráficas que ilustram os dados
   Essa forma de visualização foi escolhida porque o uso do gradiente facilita a identificação de padrões. Assim, é possível obter uma visão clara de como diferentes grupos se comportam com relação ao índice de saúde conforme a experiência e a linguagem de programação.
 
 <div style="text-align: center;">
-  <img src="grafos/hipotese_1.png" alt="Heatmap (Mapa de Calor)" width="400"/>
+  <img src="grafos/hipotese_1.png" alt="Heatmap (Mapa de Calor)" width="500"/>
 </div>
 
   
@@ -24,5 +24,5 @@ Nesta seção, apresentaremos as visualizações gráficas que ilustram os dados
  
 
 <div style="text-align: center;">
-  <img src="grafos/hipotese_1.png" alt="Gráfico de Disperssão" width="400"/>
+  <img src="grafos/hipotese_2.png" alt="Gráfico de Disperssão" width="500"/>
 </div>
