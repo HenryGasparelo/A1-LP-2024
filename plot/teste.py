@@ -206,7 +206,7 @@ plt.text(1.0, 1.05, "Índice de Hábitos Saudáveis",
 plt.show()
 
 """
-
+"""
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
@@ -234,6 +234,76 @@ g = sns.lmplot(
 
 # Ajustar os rótulos dos eixos
 g.set_axis_labels("Anos Codando", "Salário Anual (convertido)")
+
+# Exibir o gráfico
+plt.show()
+"""
+"""
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import sys
+
+# Para poder importar o módulo a partir do diretório '../src'
+sys.path.append('../src')
+
+import dataframes_hipoteses as dh
+import main as mn
+
+# Carregar o dataset
+df = pd.DataFrame(dh.gerar_dataframe_hipotese2(mn.dados))
+
+# Criar o gráfico
+g = sns.lmplot(
+    data=df,
+    x="PeriodoCodando", y="Salario", hue="LinguagemProgramacao",
+    height=5, palette="tab10"
+)
+
+# Alterar o título da legenda (índice do hue)
+g._legend.set_title("Linguagens")
+
+# Ajustar os rótulos dos eixos
+plt.xlabel("Período Codando", labelpad=17)
+plt.ylabel("Salário", labelpad=17)
+
+# Exibir o gráfico
+plt.show()
+"""
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import sys
+import numpy as np
+
+# Para poder importar o módulo a partir do diretório '../src'
+sys.path.append('../src')
+
+import dataframes_hipoteses as dh
+import main as mn
+
+sns.set_theme(style="whitegrid")
+
+# Carregar o dataframe
+df = pd.DataFrame(dh.gerar_dataframe_hipotese1_original(mn.dados))
+
+# Paleta personalizada
+paleta_linda_hex = ['#DCD301', '#DC0701', '#001EDB']
+
+# Criar o gráfico de linhas empilhadas com marcadores
+d = sns.lineplot(
+    data=df,
+    x="AnosCodando", y="SalarioMedio", hue="Satisfacao", style="Satisfacao",
+    markers=True, dashes=False, palette=paleta_linda_hex
+)
+
+# Ajustar os rótulos dos eixos
+plt.xlabel("Anos Codando", labelpad=17)
+plt.ylabel("Salário Médio", labelpad=17)
+
+# Personalizar o título da legenda
+d.legend(title="Nível de Satisfação", title_fontsize='13', loc='best')
 
 # Exibir o gráfico
 plt.show()
