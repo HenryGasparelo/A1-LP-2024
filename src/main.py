@@ -1,38 +1,12 @@
-import manipulacao_csv as mc
-import tratamento_dados as td
-import preparacao_visualizacao as pv
-import armazenamento_dicionarios as ad
-import dataframes_hipoteses as dh
-import pandas as pd
+import sys
 
-# Caminho para o arquivo csv com os dados do stack overflow
-caminho_arquivo: str = "../data/survey_results_public.csv"
+# Adiciona o caminho para a pasta plot
+sys.path.append('../plot')
 
-# Dataframe gerado usando o csv com os dados do stack overflow
-dados: pd.core.frame.DataFrame = mc.ler_csv(caminho_arquivo)
+# Importa todos os arquivos de plotagem
+import plot_hip1
+import plot_hip2
+import plot_hip3
+import plot_hip4
 
-# Lista de colunas que irao ser utilizadas
-lista_colunas: list[str] = ["Student", 
-                 "Employment", 
-                 "FormalEducation", 
-                 "UndergradMajor",
-                 "Respondent",
-                 "YearsCoding", 
-                 "JobSatisfaction",
-                 "CareerSatisfaction",
-                 "JobSearchStatus",
-                 "LastNewJob",
-                 "UpdateCV",
-                 "ConvertedSalary",
-                 "SelfTaughtTypes",
-                 "LanguageWorkedWith",
-                 "OperatingSystem",
-                 "HoursComputer",
-                 "HoursOutside",
-                 "SkipMeals",
-                 "Exercise",
-                 "Age"]
-# OBS: Salario dado anualmente
-
-# Dataframe apenas com as colunas selecionadas
-dados_filtrados: pd.core.frame.DataFrame = mc.filtrar_colunas(dados, lista_colunas)
+# TODO Chamar as funcoes
