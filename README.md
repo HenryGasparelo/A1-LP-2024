@@ -36,3 +36,13 @@ Nesta seção, apresentaremos as visualizações gráficas que ilustram os dados
 <div style="text-align: center;">
   <img src="grafos/hipotese_3.png" alt="Gráfico de Linhas" width="500"/>
 </div> 
+
+* **Hipótese 4:** Formação Superior e Domínio de Linguagens de Programação.
+
+Para a hipótese 4, utilizamos um gráfico de linhas com marcadores para investigar a relação entre a satisfação na carreira e os níveis salariais de programadores. Os dados foram organizados com base nos anos de experiência e divididos em três grupos conforme os níveis de satisfação profissional (alta, média e baixa). No gráfico, o eixo X representa os anos de experiência e o eixo Y mostra o salário médio. As três linhas correspondem aos níveis de satisfação, permitindo uma análise comparativa de como os salários evoluem ao longo da carreira em função da satisfação.
+
+A escolha do gráfico de linhas se justifica por sua capacidade de representar tendências ao longo do tempo, facilitando a visualização das diferenças salariais entre os grupos. Essa abordagem permite identificar como a satisfação na carreira pode impactar o crescimento salarial ao longo da trajetória profissional.
+
+<div style="text-align: center;">
+  <img src="grafos/hipotese_4.png" alt="Gráfico de Linhas Empilhadas com Marcadores" width="500"/>
+</div> 
