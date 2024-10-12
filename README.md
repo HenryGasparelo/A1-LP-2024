@@ -5,9 +5,13 @@
 # LINK: https://www.kaggle.com/datasets/stackoverflow/stack-overflow-2018-developer-survey
 
 ## Alunos e matrículas:
+
 José Thevez Gomes Guedes, 241708005
+
 Isaías Gouvêa Gonçalves, 241708012
+
 Henrique Gabriel Gasparelo, 241708055
+
 Davi de França Vasconcelos Nunes, 241708053
 
 ## Código fonte
