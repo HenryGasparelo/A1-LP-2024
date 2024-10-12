@@ -1,6 +1,8 @@
 # A1-LP-2024
 
-# ESCREVER AQUI COMO BAIXAR O DATASET
+# PARA BAIXAR O DATASET E EXECUTAR O CÓDIGO, BASTA BAIXAR O DATAFRAME "survey_results_public.csv" NO LINK ABAIXO E COLOCÁ-LO NA PASTA `\data` COM O NOME "survey_results_public.csv", APÓS ISSO, BASTA EXECUTAR O ARQUIVO `main.py` PARA VERIFICAR O CÓDIGO FONTE E `tests_main.py` PARA VERIFICAR OS TESTES. LEMBRE DE VERIFICAR O ARQUIVO `requirements.txt` COM AS BIBLIOTECAS E VERSÕES DO PYTHON NECESSÁRIAS. O PAPER ESTÁ NA PASTA `\paper`.
+
+# LINK: https://www.kaggle.com/datasets/stackoverflow/stack-overflow-2018-developer-survey
 
 ## Código fonte
 
