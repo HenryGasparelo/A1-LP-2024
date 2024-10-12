@@ -4,6 +4,12 @@
 
 # LINK: https://www.kaggle.com/datasets/stackoverflow/stack-overflow-2018-developer-survey
 
+## Alunos e matrículas:
+José Thevez Gomes Guedes, 241708005
+Isaías Gouvêa Gonçalves, 241708012
+Henrique Gabriel Gasparelo, 241708055
+Davi de França Vasconcelos Nunes, 241708053
+
 ## Código fonte
 
 Nesta seção, iremos descrever as funcionalidades, propostas e detalhes de cada módulo do código fonte. No total, foram desenvolvidos 6 módulos, que fornecem a manipulação do dataframe, o tratamento dos dados, a preparação para visualização e a geração dos dataframes de cada hipótese. Todas essas ferramentas foram fundamentais para as visualizações gráficas e organização dos dados, como será descrito a seguir.
