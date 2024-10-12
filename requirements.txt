@@ -1,12 +1,13 @@
 Disclaimer: utilizar as bibliotecas mais atualizadas o possível. Todos os códigos funcionaram nas versões estáveis mais recentes das bibliotecas em outubro de 2024
 
 Python 3.12.4
-Pandas
-Seaborn
-NumPy
-Unittest
+Pandas 2.2.2
 Pandas.testing
+Seaborn 0.13.2
+NumPy 1.26.4
+Matplotlib 3.8.4
 
 (Nativos do Python)
 Sys
 Os
+Unittest
