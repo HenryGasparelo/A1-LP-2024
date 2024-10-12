@@ -14,9 +14,13 @@ Henrique Gabriel Gasparelo, 241708055
 
 Davi de França Vasconcelos Nunes, 241708053
 
+## Gráficos
+
+Na pasta `\graficos`, são encontradas todas imagens dos gráficos utilizados para visualizações.
+
 ## Código fonte
 
-Nesta seção, iremos descrever as funcionalidades, propostas e detalhes de cada módulo do código fonte. No total, foram desenvolvidos 6 módulos, que fornecem a manipulação do dataframe, o tratamento dos dados, a preparação para visualização e a geração dos dataframes de cada hipótese. Todas essas ferramentas foram fundamentais para as visualizações gráficas e organização dos dados, como será descrito a seguir.
+Nesta seção, iremos descrever as funcionalidades, propostas e detalhes de cada módulo do código fonte, na pasta `\src`. No total, foram desenvolvidos 6 módulos, que fornecem a manipulação do dataframe, o tratamento dos dados, a preparação para visualização e a geração dos dataframes de cada hipótese. Todas essas ferramentas foram fundamentais para as visualizações gráficas e organização dos dados, como será descrito a seguir.
 
 ### Main
 
@@ -70,7 +74,7 @@ Este módulo, intitulado `dataframes_hipoteses.py`, gera, usando as funções de
 
 ## Plotagens:
 
-Nesta seção, apresentaremos as visualizações gráficas que ilustram os dados analisados para cada hipótese do projeto. As plotagens são ferramentas fundamentais para explorar e entender os padrões nos dados, facilitando a interpretação e extração de insights. Para cada hipótese, utilizaremos diferentes tipos de gráficos adequados para destacar as relações e tendências presentes.
+Nesta seção apresentaremos as visualizações gráficas que ilustram os dados analisados para cada hipótese do projeto. As plotagens, encontradas na pasta `\plots`, são ferramentas fundamentais para explorar e entender os padrões nos dados, facilitando a interpretação e extração de insights. Para cada hipótese, utilizaremos diferentes tipos de gráficos adequados para destacar as relações e tendências presentes.
 
 
 * **Hipótese 1:** Índices de Hábitos Saudáveis entre Programadores.
