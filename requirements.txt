@@ -1,0 +1,12 @@
+Disclaimer: utilizar as bibliotecas mais atualizadas o possível. Todos os códigos funcionaram nas versões estáveis mais recentes das bibliotecas em outubro de 2024
+
+Python 3.12.7
+Pandas
+Seaborn
+NumPy
+Unittest
+Pandas.testing
+
+(Nativos do Python)
+Sys
+Os
